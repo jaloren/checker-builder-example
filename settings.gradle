@@ -1,0 +1,18 @@
+pluginManagement {
+    dependencyResolutionManagement {
+        repositories {
+            mavenCentral()
+        }
+    }
+}
+
+rootProject.name = 'checker-builder-root'
+fileTree('.') {
+    include '**/build.gradle'
+    exclude 'build.gradle' // Exclude the root build file.
+    exclude '**/build/**'
+}.collect {
+    relativePath(it.parent).replace(File.separator, ':')
+}.each {
+    include(it)
+}
